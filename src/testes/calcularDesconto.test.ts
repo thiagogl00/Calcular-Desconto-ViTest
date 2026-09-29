@@ -11,7 +11,12 @@ import { calcularDesconto } from '../calcularDesconto.js';
     {valor: 12000, percentual: 20},
     {valor: 12000, percentual: 200},
     {valor: 12000, percentual: 150},
-
+    {valor: 1000, percentual: 0},
+    {valor: 500.10, percentual: 0},
+    {valor: 0, percentual: 0},
+    {valor: 1000, percentual: 100},
+    {valor: 2000.10, percentual: 100},
+    {valor: 0, percentual: 100},
 
    ]
 
@@ -20,10 +25,17 @@ describe('Calcular desconto com sucesso',()=>{
         //Código
     });
     test('Percentual 0 preserva o valor positivo',()=>{
-        //Código
+        for(const executar of valoresMocks) {
+            if(executar.percentual === 0 && executar.valor >= 0){
+                expect(calcularDesconto(executar.valor, executar.percentual)).toBe(executar.valor);
+            }
+        }
     });
     test('Percentual 100 aplicado a um valor positivo resulta em zero',()=>{
-        //Código
+      const list = valoresMocks.filter((obj)=> obj.percentual === 100 && obj.valor >= 0);
+      for(const executar of list) {
+        expect(calcularDesconto(executar.valor, executar.percentual)).toBe(0);
+      }
     });
     test('Valor 0 resulta em 0',()=>{
         //Código
@@ -55,5 +67,4 @@ describe('Erro ao calcular descontos',()=>{
       expect(()=> calcularDesconto(percorre.valor,percorre.percentual)).toThrow
     })
 
-    }
-);
+});
