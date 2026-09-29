@@ -25,11 +25,10 @@ describe('Calcular desconto com sucesso',()=>{
         //Código
     });
     test('Percentual 0 preserva o valor positivo',()=>{
-        for(const executar of valoresMocks) {
-            if(executar.percentual === 0 && executar.valor >= 0){
-                expect(calcularDesconto(executar.valor, executar.percentual)).toBe(executar.valor);
-            }
-        }
+      const list = valoresMocks.filter((obj)=> obj.percentual === 0 && obj.valor >= 0);
+      for(const executar of list) {
+        expect(calcularDesconto(executar.valor, executar.percentual)).toBe(executar.valor);
+      }
     });
     test('Percentual 100 aplicado a um valor positivo resulta em zero',()=>{
       const list = valoresMocks.filter((obj)=> obj.percentual === 100 && obj.valor >= 0);
