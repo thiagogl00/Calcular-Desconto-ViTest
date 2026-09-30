@@ -17,6 +17,8 @@ import { calcularDesconto } from '../calcularDesconto.js';
     {valor: 1000, percentual: 100},
     {valor: 2000.10, percentual: 100},
     {valor: 0, percentual: 100},
+    {valor: -0, percentual: 100},
+    {valor: -15, percentual: 100},
 
    ]
 
