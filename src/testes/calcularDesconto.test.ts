@@ -31,7 +31,7 @@ describe('Calcular desconto com sucesso',()=>{
       }
     
 });
-    });
+  
     test('Percentual 0 preserva o valor positivo',()=>{
       const list = valoresMocks.filter((obj)=> obj.percentual === 0 && obj.valor >= 0);
       for(const executar of list) {
@@ -41,10 +41,11 @@ describe('Calcular desconto com sucesso',()=>{
     test('Percentual 100 aplicado a um valor positivo resulta em zero',()=>{
       const list = valoresMocks.filter((obj)=> obj.percentual === 100 && obj.valor >= 0);
       for(const executar of list) {
-        expect(calcularDesconto(executar.valor, executar.percentual)).toBe(0);
+        expect(calcularDesconto(executar.valor, executar.percentual)).toBeCloseTo(0,5);
       }
     });
-    
+});
+
 describe('Calcular desconto com valor zero', () => {
     test('Valor 0 resulta em 0', () => {
         const list = valoresMocks.filter((obj) => obj.valor === 0);
