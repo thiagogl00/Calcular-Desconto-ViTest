@@ -22,7 +22,13 @@ import { calcularDesconto } from '../calcularDesconto.js';
 
 describe('Calcular desconto com sucesso',()=>{
     test('Desconto de 10% em um valor positivo',()=>{
-        //Código
+    const list = valoresMocks.filter((obj)=> obj.valor > 0);
+    for(const executar of list) {
+      const calculoDezPorcento= executar.valor - (executar.valor * 10 / 100)
+        expect(calcularDesconto(executar.valor,10)).toBe(calculoDezPorcento);
+      }
+    
+});
     });
     test('Percentual 0 preserva o valor positivo',()=>{
       const list = valoresMocks.filter((obj)=> obj.percentual === 0 && obj.valor >= 0);
@@ -40,7 +46,6 @@ describe('Calcular desconto com sucesso',()=>{
         //Código
     });
     
-});
 
 
 describe('Erro ao calcular descontos',()=>{
@@ -61,9 +66,13 @@ describe('Erro ao calcular descontos',()=>{
       })
   });
 
-  
-    test.each(valoresMocks)('Verificar se o valor negativo lança o error',(percorre)=>{
-      expect(()=> calcularDesconto(percorre.valor,percorre.percentual)).toThrow
+    test('Verificar se o valor negativo lança o error',()=>{
+      const listaValorNegativo = valoresMocks.filter((obj)=> obj.valor < 0);
+       for(const executar of listaValorNegativo) {
+          expect(() => calcularDesconto(executar.valor, executar.percentual)).toThrow("Valores inválidos");
+        
+    }
     })
+    
 
 });
