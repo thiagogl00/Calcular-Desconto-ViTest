@@ -44,11 +44,16 @@ describe('Calcular desconto com sucesso',()=>{
         expect(calcularDesconto(executar.valor, executar.percentual)).toBe(0);
       }
     });
-    test('Valor 0 resulta em 0',()=>{
-        //Código
-    });
     
-
+describe('Calcular desconto com valor zero', () => {
+    test('Valor 0 resulta em 0', () => {
+        const list = valoresMocks.filter((obj) => obj.valor === 0);
+        for (const executar of list) {
+          expect(calcularDesconto(executar.valor, executar.percentual)).toBe(0);
+        }
+    });
+});
+    
 
 describe('Erro ao calcular descontos',()=>{
   
