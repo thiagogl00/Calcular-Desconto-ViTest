@@ -1,6 +1,5 @@
-// TIPOS E DADOS
 
-export interface ExecucaoTeste {
+interface ExecucaoTeste {
   id: number;
   nome: string;
   status: 'sucesso' | 'falha';
@@ -8,7 +7,7 @@ export interface ExecucaoTeste {
 }
 
 // Array tipado com 5 execuções de teste
-export const execucoes: ExecucaoTeste[] = [
+const execucoes: ExecucaoTeste[] = [
   { id: 1, nome: 'Login do Usuário', status: 'sucesso', duracaoMs: 120 },
   { id: 2, nome: 'Cadastro de Produto', status: 'falha', duracaoMs: 350 },
   { id: 3, nome: 'Checkout de Compra', status: 'sucesso', duracaoMs: 450 },
@@ -17,14 +16,14 @@ export const execucoes: ExecucaoTeste[] = [
 ];
 
 // Manipulações com map, filter e reduce
-export const nomesExecucoes = execucoes.map((e) => e.nome);
+const nomesExecucoes = execucoes.map((e) => e.nome);
 
-export const execucoesComSucesso = execucoes.filter((e) => e.status === 'sucesso');
+const execucoesComSucesso = execucoes.filter((e) => e.status === 'sucesso');
 
-export const duracaoTotalMs = execucoes.reduce((acc, e) => acc + e.duracaoMs, 0);
+const duracaoTotalMs = execucoes.reduce((acc, e) => acc + e.duracaoMs, 0);
 
 // Função assíncrona com simulação de latência de rede
-export async function buscarExecucaoPorId(id: number): Promise<ExecucaoTeste> {
+async function buscarExecucaoPorId(id: number): Promise<ExecucaoTeste> {
   // Simula atraso de rede (50ms)
   await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -36,8 +35,6 @@ export async function buscarExecucaoPorId(id: number): Promise<ExecucaoTeste> {
 
   return execucao;
 }
-
-// TESTES COM VITEST
 
 import { describe, it, expect } from 'vitest';
 import {
@@ -77,8 +74,8 @@ describe('buscarExecucaoPorId (Async)', () => {
   });
 
   it('deve lançar erro quando o id não existir (caminho de erro)', async () => {
-    await expect(buscarExecucaoPorId(999)).rejects.toThrow(
-      'Execução de teste com ID 999 não encontrada.'
+    await expect(buscarExecucaoPorId(255)).rejects.toThrow(
+      'Execução de teste com ID 255 não encontrada.'
     );
   });
 });
